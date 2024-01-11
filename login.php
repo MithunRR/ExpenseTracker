@@ -11,12 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-
     if (!empty($email) && !empty($password)){
-        // read from database
         $query = "select * from user where email = '$email' limit 1";
         $result = mysqli_query($con, $query);
-
         if ($result){
             if ($result && mysqli_num_rows($result) > 0){
                 $user_data = mysqli_fetch_assoc($result);
@@ -43,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track.X | Incomes</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <style>
     #text{
@@ -92,6 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         </div>
     </div>
 
-    <script src="index.js"></script>
+    <script src="static/js/index.js"></script>
 </body>
 </html>

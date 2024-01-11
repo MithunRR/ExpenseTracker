@@ -6,27 +6,23 @@ include("connection.php");
 include("functions.php");
 
 $user_data = check_login($con);
+$user_fk = $user_data['id'];
 
-// Expenses form submittion
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'])) {
     $name = $_POST['name'];
     $category =  $_POST['category'];
     $amount = $_POST['amount'];
     $date = date('Y-m-d', strtotime($_POST['date']));
     $note = $_POST['note'];
-
     $user_fk = $user_data['id'];
 
     if (!empty($name)) {
-        // Save to database 
         $query = "INSERT INTO expenses (name, category, amount, date, note, user_fk) VALUES ('$name', '$category', '$amount', '$date', '$note', '$user_fk')";
         mysqli_query($con, $query);
     } else {
         echo "Name cannot be empty";
     }
 }
-
-$user_fk = $user_data['id'];
 
 //delete row from expenses table
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
@@ -44,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track.X | Incomes</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="inc.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/inc.css">
 </head>
 <body>
     <div class="container">
@@ -68,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
                     if ($_SESSION['email']){
                         echo $user_data['name'];
                         echo '  | <a href="logout.php">Logout</a>';
-                        
                     }
                     else{
                         header("Location: login.php");
@@ -98,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
                             $sqlx = "SELECT id, exp_category FROM categoryx WHERE user_fk = '$user_fk'";
                             $exp_cat_data = mysqli_query($con, $sqlx);
                             $row_numx = mysqli_num_rows($exp_cat_data);
-                            if ($row_num > 0){
+                            if ($row_numx > 0){
                                 while ($rowx = mysqli_fetch_assoc($exp_cat_data)){
                                     echo "<option name=".$rowx['exp_category']." value=".$rowx['exp_category'].">".$rowx['exp_category']."</option>";
                                 }
@@ -143,10 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
                             if($expense_row>0){
                                 while ($row_exp = mysqli_fetch_assoc($expense_data)){
                                     echo "<tr>";
-                                    // for ($i=1; $i <= $income_row; $i++){
-                                    //     echo "<td>$i</td>";
-                                    // }
-                                    // echo "<td>".$row_inc['id']."<td>";
                                     echo "<td>1</td>";
                                     echo "<td>".$row_exp['name']."</td>";
                                     echo "<td>".$row_exp['category']."</td>";
@@ -166,7 +157,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
                         ?>
                     </table>
                 </div>
-                
             </div>
             <div class="exp_display"></div>
         </div>
@@ -175,6 +165,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
     <br>
     <br>
 
-    <script src="inc.js"></script>
+    <script src="static/js/inc.js"></script>
 </body>
 </html>

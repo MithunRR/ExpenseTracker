@@ -5,16 +5,12 @@ include("connection.php");
 include("functions.php");
 
 $user_data = check_login($con);
-
 $user_fk = $user_data['id'];
 
-// Handling income category form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inc_cat'])) {
     $inc_category = $_POST['inc_cat'];
     $user_fk = $user_data['id'];
-
     if (!empty($inc_category)) {
-        // Save to database 
         $query = "INSERT INTO category (inc_category, user_fk) VALUES ('$inc_category', '$user_fk')";
         mysqli_query($con, $query);
     } else {
@@ -22,29 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inc_cat'])) {
     }
 }
 
-// Handling expense category form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['exp_cat'])) {
     $exp_category = $_POST['exp_cat'];
     $user_fk = $user_data['id'];
-
     if (!empty($exp_category)) {
-        // Save to database 
         $query = "INSERT INTO categoryx (exp_category, user_fk) VALUES ('$exp_category', '$user_fk')";
         mysqli_query($con, $query);
     } else {
         $emptyX_error = "Expense category cannot be empty";
     }
 }
-
-$sqlq = "SELECT id, inc_category FROM category WHERE user_fk = '$user_fk'";
-$inc_cat_data = mysqli_query($con, $sqlq);
-// No of rows
-$row_num = mysqli_num_rows($inc_cat_data);
-
-$sqlx = "SELECT id, exp_category FROM categoryx WHERE user_fk = '$user_fk'";
-$exp_cat_data = mysqli_query($con, $sqlx);
-// No of rows
-$row_numx = mysqli_num_rows($exp_cat_data);
 
 //delete income category
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
@@ -68,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_x'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track.X | Settings</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="set.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/set.css">
 </head>
 <body>
     <div class="container">
@@ -158,6 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_x'])) {
         </div>
     </div>
 
-    <script src="index.js"></script>
+    <script src="static/js/index.js"></script>
 </body>
 </html>

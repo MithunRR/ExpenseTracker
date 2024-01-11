@@ -6,32 +6,22 @@ include("connection.php");
 include("functions.php");
 
 $user_data = check_login($con);
+$user_fk = $user_data['id'];
 
-// Income form submittion
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'])) {
     $name = $_POST['name'];
     $category =  $_POST['category'];
     $amount = $_POST['amount'];
     $date = date('Y-m-d', strtotime($_POST['date']));
     $note = $_POST['note'];
-
     $user_fk = $user_data['id'];
-
     if (!empty($name)) {
-        // Save to database 
         $query = "INSERT INTO incomes (name, category, amount, date, note, user_fk) VALUES ('$name', '$category', '$amount', '$date', '$note', '$user_fk')";
         mysqli_query($con, $query);
     } else {
         echo "Name cannot be empty";
     }
 }
-
-$user_fk = $user_data['id'];
-
-// to show income table from the database  
-$sql = "SELECT id, name, category, amount, date, note FROM incomes WHERE user_fk='$user_fk'";
-$income_data = mysqli_query($con, $sql);
-$income_row = mysqli_num_rows($income_data);
 
 //delete row from incomes table
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
@@ -48,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track.X | Incomes</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="inc.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/inc.css">
 </head>
 <body>
     <div class="container">
@@ -170,7 +160,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
                         ?>
                     </table>
                 </div>
-                
             </div>
             <div class="exp_display"></div>
         </div>
@@ -179,6 +168,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_i'])) {
     <br>
     <br>
 
-    <script src="inc.js"></script>
+    <script src="static/js/inc.js"></script>
 </body>
 </html>

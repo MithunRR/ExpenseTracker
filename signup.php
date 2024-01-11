@@ -4,7 +4,6 @@ session_start();
 include("connection.php");
 include("functions.php");
 
-// Check if the user is already logged in, redirect to index.php
 if (isset($_SESSION['email'])) {
     header("Location: index.php");
     die;
@@ -16,10 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     if (!empty($email) && !empty($password)) {
-        // save to database
         $query = "INSERT INTO user (name, email, password) VALUES ('$name', '$email', '$password')";
         mysqli_query($con, $query);
-
         header("Location: login.php");
         die;
     } else {
@@ -35,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track.X | Incomes</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <style>
     #text{
@@ -84,6 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 
-    <script src="index.js"></script>
+    <script src="static/js/index.js"></script>
 </body>
 </html>
