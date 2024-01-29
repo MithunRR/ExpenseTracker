@@ -63,9 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div id="box">
             <form action="" method="post">
                 <div style="font-size:20px; margin:10px; ">Signup</div>
-                <input id="text" type="text" name=name><br><br>
-                <input id="text" type="text" name=email><br><br>
-                <input id="text" type="password" name=password><br><br>
+                <input id="text" type="text" name=name placeholder="Enter your name"><br><br>
+                <input id="text" type="text" name=email placeholder="Enter your email"><br><br>
+                <input id="text" type="password" name=password placeholder="Set Password"><br><br>
                 <input id="button" type="submit" value=Signup><br><br>
                 <a href="login.php">Login</a>
             </form>

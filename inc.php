@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'])) {
     $amount = $_POST['amount'];
     $date = date('Y-m-d', strtotime($_POST['date']));
     $note = $_POST['note'];
-    $user_fk = $user_data['id'];
+    $user_fk = $user_data['id'];    
     if (!empty($name)) {
         $query = "INSERT INTO incomes (name, category, amount, date, note, user_fk) VALUES ('$name', '$category', '$amount', '$date', '$note', '$user_fk')";
         mysqli_query($con, $query);
