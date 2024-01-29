@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     if (!empty($email) && !empty($password)) {
-        $query = "INSERT INTO user (name, email, password) VALUES ('$name', '$email', '$password')";
+        $query = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
         mysqli_query($con, $query);
         header("Location: login.php");
         die;
