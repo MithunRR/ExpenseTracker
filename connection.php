@@ -1,9 +1,9 @@
 <?php
 
-$dbhost = "monorail.proxy.rlwy.net";
-$dbuseer = "root";
-$dbpass = "bhA52G4ce3Dgaa6b6gf-g4gF5ca5deb5";
-$dbname = "railway";
+$dbhost = "localhost";
+$dbuseer = "id21837401_root";
+$dbpass = "Mithun@123";
+$dbname = "id21837401_trackx";
 
 if (!$con = mysqli_connect($dbhost, $dbuseer, $dbpass, $dbname)){
     die ("failed to connect");
